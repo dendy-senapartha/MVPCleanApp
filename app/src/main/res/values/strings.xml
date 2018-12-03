@@ -1,0 +1,14 @@
+<resources>
+    <string name="navigation_view_header_title">My Notes</string>
+    <string name="new_note">New Note</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="label_all">All Notes</string>
+    <string name="loading_notes_error">Error while loading notes</string>
+    <string name="no_notes_all">You have no Notes!</string>
+    <string name="add_notes_item">Add a Notes item</string>
+    <string name="marked_notes_delete">Marked notes deleted</string>
+    <string name="menu_back">Back</string>
+    <string name="menu_next">Next</string>
+    <string name="nothing_to_save">Nothing to save.</string>
+    <string name="menu_item_delete">Delete</string>
+</resources>

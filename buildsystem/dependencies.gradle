@@ -1,0 +1,123 @@
+ext {
+    //Android
+    androidMinSdkVersion = 16
+    androidTargetSdkVersion = 28
+    androidCompileSdkVersion = 28
+    multiDexVersion = '1.0.2'
+
+    //Libraries
+    appCompatVersion = '28.0.0'
+    supportLibraryVersion = '27.1.1'
+    archLifecycleExtensionVersion = '1.1.0'
+    constraintLayoutVersion = '1.1.0'
+    daggerVersion = '2.12'
+    designVersion = '27.1.0'
+    butterknifeVersion = '8.8.1'
+    timberVersion = '4.7.1'
+    rxAndroidVersion = '2.0.2'
+    rxJavaVersion = '2.x.x'
+    zxingAndroidVersion = '3.6.0'
+    zxingCoreVersion = '3.3.0'
+    circleImageVersion = '2.2.0'
+    glideVersion = '4.2.0'
+    rxBindingVersion = '2.1.1'
+    easyFlipVersion = '2.0.5'
+    pageIndicatorViewVersion = '1.0.1'
+    cardviewVersion = '27.1.1'
+    simpleStackVersion = '1.9.2'
+    autoValueVersion = '1.6.1'
+    autoValueParcelVersion = '0.2.6'
+    expandableVersion = '2.9.2'
+    autofitTextviewVersion = '0.2.1'
+    carouselViewVersion = '0.1.4'
+    libPhoneNumberVersion = '8.9.9'
+    materialDialogVersion = '0.9.6.0'
+    caveRockVersion = '1.2.1'
+    okioVersion = "1.14.0"
+    skeletonVersion = '1.1.1'
+    shimmerlayoutVersion = '2.1.0'
+    ormLiteVersion = '5.0'
+    securePreferencesVersion = '0.1.4'
+    rxScreenshotVersion = '1.2.0'
+
+    //Testing
+    jUnitVersion = '4.12'
+    runnerVersion = '1.0.2'
+    espressoVersion = '3.0.2'
+    mockitoVersion = '1.9.5'
+
+    fastjsonVersion = '1.1.70.android'
+
+    def androidLibs = [
+            appCompat        : [group: 'com.android.support', name: 'appcompat-v7', version: appCompatVersion],
+            supportv4        : [group: 'com.android.support', name: 'support-v4', version: appCompatVersion],
+            supportAnnotation: [group: 'com.android.support', name: 'support-annotations', version: supportLibraryVersion],
+            androidDesign    : [group: 'com.android.support', name: 'design', version: designVersion],
+            multidex         : [group: 'com.android.support', name: 'multidex', version: multiDexVersion],
+            cardview         : [group: 'com.android.support', name: 'cardview-v7', version: cardviewVersion],
+            archLifecycleExt : [group: 'android.arch.lifecycle', name: 'extensions', version: archLifecycleExtensionVersion],
+            constraintLayout : [group: 'com.android.support.constraint', name: 'constraint-layout', version: constraintLayoutVersion]
+    ]
+
+    def libs = [
+            dagger              : [group: 'com.google.dagger', name: 'dagger', version: daggerVersion],
+            daggerCompiler      : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
+            timber              : [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
+            butterknife         : [group: 'com.jakewharton', name: 'butterknife', version: butterknifeVersion],
+            butterknifeCompiler : [group: 'com.jakewharton', name: 'butterknife-compiler', version: butterknifeVersion],
+            rxAndroid           : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
+            rxJava              : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
+            securePreference    : [group: 'com.scottyab', name: 'secure-preferences-lib', version: securePreferencesVersion],
+            fastjson            : [group: 'com.alibaba', name: 'fastjson', version: fastjsonVersion]
+    ]
+
+    def testLibs = [
+            junit       : [group: 'junit', name: 'junit', version: jUnitVersion],
+            runner      : [group: 'com.android.support.test', name: 'runner', version: runnerVersion],
+            espressoCore: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: espressoVersion],
+            mockito     : [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]
+    ]
+
+    appDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "implementation", dependency: androidLibs.supportv4],
+            [configuration: "implementation", dependency: androidLibs.supportAnnotation],
+            [configuration: "implementation", dependency: androidLibs.androidDesign],
+            [configuration: "implementation", dependency: androidLibs.cardview],
+            [configuration: "implementation", dependency: androidLibs.constraintLayout],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "implementation", dependency: libs.butterknife],
+            [configuration: "implementation", dependency: libs.timber],
+            [configuration: "implementation", dependency: androidLibs.multidex],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "annotationProcessor", dependency: libs.butterknifeCompiler]
+
+    ]
+
+    domainDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.mockito],
+            [configuration: "androidTestImplementation", dependency: testLibs.runner],
+            [configuration: "androidTestImplementation", dependency: testLibs.espressoCore]
+    ]
+
+    dataDependencies = [
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testLibs.runner],
+            [configuration: "androidTestImplementation", dependency: testLibs.espressoCore],
+            [configuration: "implementation", dependency: libs.securePreference],
+            [configuration: "implementation", dependency: libs.fastjson],
+    ]
+}

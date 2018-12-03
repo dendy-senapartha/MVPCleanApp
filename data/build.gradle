@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion project.androidCompileSdkVersion
+    defaultConfig {
+        minSdkVersion project.androidMinSdkVersion
+        targetSdkVersion project.androidTargetSdkVersion
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "env"
+    productFlavors {
+        dev {
+            dimension "env"
+        }
+        preprod {
+            dimension "env"
+        }
+        production {
+            dimension "env"
+        }
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    libraryVariants.all { variant ->
+        def name = variant.getName()
+        variant.buildConfigField('String', 'BASE_URL', "\"${prodBaseUrl}\"")
+
+        if (name.contains("dev")) {
+            variant.buildConfigField('String', 'BASE_URL', "\"${devBaseUrl}\"")
+        } else if (name.contains("preprod")) {
+            variant.buildConfigField('String', 'BASE_URL', "\"${preprodBaseUrl}\"")
+        } else if (name.contains("production")) {
+
+        }
+    }
+    buildToolsVersion '28.0.2'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    rootProject.dataDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+    implementation project(path: ':domain')
+}

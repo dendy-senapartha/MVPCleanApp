@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+
+android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+    def versionMajor = globalConfig["versionMajor"]
+    def versionMinor = globalConfig["versionMinor"]
+    def versionPatch = globalConfig["versionPatch"]
+    def buildNumber = globalConfig["buildNumber"]
+    compileSdkVersion project.androidCompileSdkVersion
+    defaultConfig {
+        applicationId "com.example.dendy_s784.mvccleanapptemplate"
+        minSdkVersion project.androidMinSdkVersion
+        targetSdkVersion project.androidTargetSdkVersion
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        debug {
+            versionNameSuffix "-debug"
+            resValue "string", "app_version", "${defaultConfig.versionName}.${buildNumber}${versionNameSuffix}"
+            debuggable true
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "app_version", "${defaultConfig.versionName}"
+            ndk {
+                abiFilters "arm64-v8a", "armeabi-v7a"
+            }
+        }
+    }
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/view_base',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+    flavorDimensions "env"
+    productFlavors {
+        dev {
+            dimension "env"
+            applicationIdSuffix '.dev'
+            versionNameSuffix '-dev'
+            ext.betaDistributionGroupAliases = "mvc-clean-app-template"
+            manifestPlaceholders = [additionalManifestValue: "iam-additional"]
+        }
+        preprod {
+            dimension "env"
+            applicationIdSuffix '.pre'
+            versionNameSuffix '-pre'
+            ext.betaDistributionGroupAliases = "production-tester"
+            manifestPlaceholders = [additionalManifestValue: "iam-additional-preprod"]
+        }
+        production {
+            dimension "env"
+            ext.betaDistributionGroupAliases = "production-tester"
+            manifestPlaceholders = [additionalManifestValue: "iam-additional-production"]
+        }
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+    }
+    applicationVariants.all { variant ->
+        def name = variant.getName()
+        variant.buildConfigField('String', 'BASE_URL', "\"${prodBaseUrl}\"")
+        variant.resValue("string", "app_name", "MVC-CLEAN-APP-TEMPLATE")
+        variant.buildConfigField('int', 'VERSION_MAJOR', "${versionMajor}")
+        variant.buildConfigField('int', 'VERSION_MINOR', "${versionMinor}")
+        variant.buildConfigField('int', 'VERSION_PATCH', "${versionPatch}")
+
+
+        if (name.contains("dev")) {
+            variant.buildConfigField('String', 'BASE_URL', "\"${devBaseUrl}\"")
+            variant.resValue("string", "app_name", "MVC-CLEAN-APP-TEMPLATE-DEV")
+        } else if (name.contains("preprod")) {
+            variant.buildConfigField('String', 'BASE_URL', "\"${preprodBaseUrl}\"")
+            variant.resValue("string", "app_name", "MVC-CLEAN-APP-TEMPLATE-PRE")
+        } else if (name.contains("production")) {
+            variant.resValue("string", "app_name", "MVC-CLEAN-APP-TEMPLATE-PROD")
+        }
+    }
+    buildToolsVersion '28.0.2'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    rootProject.appDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+}
