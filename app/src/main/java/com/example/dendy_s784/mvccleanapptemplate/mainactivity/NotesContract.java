@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.example.dendy_s784.mvccleanapptemplate.base.AbstractContract;
 import com.example.dendy_s784.mvccleanapptemplate.model.Note;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface NotesContract {
@@ -21,13 +22,11 @@ public interface NotesContract {
         void showNoNotes();
 
         void showMarkedNotesDelete();
-        void onNoteDelete(String mid);
+        void onNoteDelete(ArrayList<String> mid);
     }
 
     interface Presenter extends AbstractContract.AbstractPresenter{
         void loadNotes();
-        void deleteNote(Note note);
-       // void DeleteMarkedNotes(List<NoteEntity> markedNote);
-
+        void deleteNote(ArrayList<Note> notes);
     }
 }

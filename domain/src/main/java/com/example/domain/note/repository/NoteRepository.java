@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.domain.note.NoteResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -20,5 +21,5 @@ public interface NoteRepository {
 
     Observable<String> deleteAllNotes();
 
-    Observable<String> deleteNotes(@NonNull String taskId);
+    Observable<ArrayList<String>> deleteNotes(@NonNull ArrayList<String> taskId);
 }

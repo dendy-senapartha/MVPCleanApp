@@ -118,29 +118,31 @@ public class NotePreferences {
         return response;
     }
 
-    public String deleteNote(String mId)  throws UnInitializedSecuredPreferencesException  {
+    public ArrayList<String>  deleteNote(ArrayList<String>  midNotes)  throws UnInitializedSecuredPreferencesException  {
         initChecking();
         //get available notes list first
         List<JSONObject> noteList= druther.getObject(Key.NOTES, ArrayList.class);
         List<NoteResponse> listResponse = null;
         boolean noteIsAvailable = false;
-        String message = "";
+        ArrayList<String>  removedMidNotes = new ArrayList<>();
         //parse it
         if(noteList != null)
         {
             TypeReference<List<NoteResponse>> typeRef = new TypeReference<List<NoteResponse>>() {};
             listResponse = JSON.parseObject(noteList.toString(), typeRef);
             //check if noteEntity already in DB
-            for(int i=0; i<listResponse.size(); i++)
+            for(int i=0; i<midNotes.size(); i++)
             {
-                if(listResponse.get(i).mId.equalsIgnoreCase(mId))
+                for(int j=0; j<listResponse.size(); j++)
                 {
-                    //if yes, then add it
-                    noteIsAvailable = true;
-                    //send message the id if note are found and ready to delete
-                    message = listResponse.get(i).mId;
-                    listResponse.remove(i);
-
+                    if(listResponse.get(j).mId.equalsIgnoreCase(midNotes.get(i)))
+                    {
+                        //if yes, then add it
+                        noteIsAvailable = true;
+                        //send message the id if note are found and ready to delete
+                        removedMidNotes.add(listResponse.get(j).mId);
+                        listResponse.remove(j);
+                    }
                 }
             }
         }
@@ -153,11 +155,11 @@ public class NotePreferences {
                 listResponse = new ArrayList<NoteResponse>();
             }
             //this is the error message
-            message = "not found";
+            //removedMidNotes = "not found";
         }
         //save again
         druther.saveData(Key.NOTES, listResponse);
-        return message;
+        return removedMidNotes;
     }
 
     private static class Key {

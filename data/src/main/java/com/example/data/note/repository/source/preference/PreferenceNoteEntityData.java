@@ -7,6 +7,7 @@ import com.example.data.note.repository.source.NoteEntityData;
 import com.example.data.note.repository.source.NotePreferences;
 import com.example.data.note.repository.source.preference.response.NoteResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -58,7 +59,7 @@ public class PreferenceNoteEntityData implements NoteEntityData{
     }
 
     @Override
-    public Observable<String> deleteNote(String mid) {
+    public Observable<ArrayList<String>> deleteNote(ArrayList<String> mid) {
         return initObservable(()->{
             return notePreferences.deleteNote(mid);
         });

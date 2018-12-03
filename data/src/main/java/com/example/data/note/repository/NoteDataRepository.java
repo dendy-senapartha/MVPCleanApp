@@ -70,7 +70,7 @@ public class NoteDataRepository implements NoteRepository{
     }
 
     @Override
-    public Observable<String> deleteNotes(@NonNull String mid) {
+    public Observable<ArrayList<String>> deleteNotes(@NonNull ArrayList<String>  mid) {
         return initializedRequest(createNoteData().deleteNote(mid));
 
     }

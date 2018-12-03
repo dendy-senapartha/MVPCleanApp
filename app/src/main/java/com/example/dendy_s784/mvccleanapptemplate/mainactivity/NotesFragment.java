@@ -49,8 +49,6 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
     @Inject
     NotesContract.Presenter presenter;
 
-    //@BindView(R.id.tasks_list)
-    //ListView listView;
     @BindView(R.id.recycler_view)
     RecyclerView rvNotes;
     @BindView(R.id.tasksLL)
@@ -123,7 +121,6 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
 
         alertDialogHelper = new AlertDialogHelper(getActivity(), this);
         //set List view adapter and behavior
-        //mListAdapter = new NoteListAdapter(getContext(), R.layout.note_item, new ArrayList<Note>(0), mItemListener);
         multiSelectAdapter = new MultiSelectAdapter(getContext(), noteList, selectedList);
         //https://droidmentor.com/multi-select-like-whatsapp-android/
         rvNotes.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -328,15 +325,24 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
     }
 
     @Override
-    public void onNoteDelete(String mid) {
-        for (int i = 0; i < noteList.size(); i++) {
-            if (noteList.get(i).getmId().equalsIgnoreCase(mid)) {
-                Toast.makeText(getActivity(), "Delete " + noteList.get(i).getmTitle(), Toast.LENGTH_SHORT).show();
-                //send message the id if note are found and ready to delete
-                noteList.remove(i);
-                multiSelectAdapter.notifyDataSetChanged();
+    public void onNoteDelete(ArrayList<String> mid) {
+        if(mid.size()>0)
+        {
+            for (int i = 0; i < mid.size(); i++)
+            {
+                for (int j = 0; j < noteList.size(); j++)
+                {
+                    if (noteList.get(j).getmId().equalsIgnoreCase(mid.get(i))) {
+                        //todo : show message that notes already deleted
+                        //Toast.makeText(getActivity(), "Delete " + noteList.get(i).getmTitle(), Toast.LENGTH_SHORT).show();
+                        //send message the id if note are found and ready to delete
+                        noteList.remove(j);
+                    }
+                }
             }
+            multiSelectAdapter.notifyDataSetChanged();
         }
+
         if (noteList.size() == 0) {
             showNoNotes();
         }
@@ -351,8 +357,9 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
         switch (from) {
             case 1:
                 if (selectedList.size() > 0) {
+                    presenter.deleteNote(selectedList);
                     for (int i = 0; i < selectedList.size(); i++) {
-                        presenter.deleteNote(selectedList.get(i));
+                        //presenter.deleteNote(selectedList.get(i));
                     }
 
                     if (mActionMode != null) {
@@ -365,8 +372,6 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
                     mActionMode.finish();
                 }
 
-                //SampleModel mSample = new SampleModel("Name"+user_list.size(),"Designation"+user_list.size());
-                //user_list.add(mSample);
                 multiSelectAdapter.notifyDataSetChanged();
                 break;
             default:

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.example.data.note.repository.source.preference.response.NoteResponse;
 import com.example.domain.note.NoteResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -25,5 +26,5 @@ public interface NoteEntityData {
 
     Observable<NoteResponse> getNote(String taskId);
 
-    Observable<String> deleteNote(String mid);
+    Observable<ArrayList<String>> deleteNote(ArrayList<String> mid);
 }

@@ -9,6 +9,7 @@ import com.example.domain.note.NoteResult;
 import com.example.domain.note.interactor.DeleteNote;
 import com.example.domain.note.interactor.GetNotes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -49,10 +50,14 @@ public class NotesPresenter implements NotesContract.Presenter {
     }
 
     @Override
-    public void deleteNote(Note note) {
-        deleteNote.execute(new DefaultObserver<String>() {
+    public void deleteNote(ArrayList<Note> notes) {
+        ArrayList<String> midNotes = new ArrayList<>();
+        for (int i = 0; i < notes.size(); i++) {
+            midNotes.add(notes.get(i).getmId());
+        }
+        deleteNote.execute(new DefaultObserver<ArrayList<String>>() {
             @Override
-            public void onNext(String result) {
+            public void onNext(ArrayList<String> result) {
                 //todo add on action
                 view.onNoteDelete(result);
             }
@@ -61,7 +66,7 @@ public class NotesPresenter implements NotesContract.Presenter {
             public void onError(Throwable e) {
 
             }
-        }, DeleteNote.Params.forDeleteNote(note.getmId()));
+        }, DeleteNote.Params.forDeleteNote(midNotes));
     }
 
     /**
