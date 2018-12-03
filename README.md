@@ -1,2 +1,2 @@
 # MVPCleanApp
-MVP-Clean example
+MVP with Clean example app.
