@@ -11,7 +11,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-
+/**
+ * Use case to get notes from repository.
+ * **/
 public class GetNotes extends UseCase<List<NoteResult>, Void>{
 
     private final NoteRepository noteRepository;

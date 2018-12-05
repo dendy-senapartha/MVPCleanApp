@@ -46,14 +46,15 @@ android {
     productFlavors {
         dev {
             dimension "env"
-            applicationIdSuffix '.dev'
+            //this suffix will affecting Android package name recognition in firebase
+            //applicationIdSuffix '.dev'
             versionNameSuffix '-dev'
             ext.betaDistributionGroupAliases = "mvc-clean-app-template"
             manifestPlaceholders = [additionalManifestValue: "iam-additional"]
         }
         preprod {
             dimension "env"
-            applicationIdSuffix '.pre'
+            //applicationIdSuffix '.pre'
             versionNameSuffix '-pre'
             ext.betaDistributionGroupAliases = "production-tester"
             manifestPlaceholders = [additionalManifestValue: "iam-additional-preprod"]
@@ -101,3 +102,5 @@ dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':data')
 }
+
+apply plugin: 'com.google.gms.google-services'

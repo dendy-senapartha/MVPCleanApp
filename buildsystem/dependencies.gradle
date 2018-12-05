@@ -39,6 +39,7 @@ ext {
     ormLiteVersion = '5.0'
     securePreferencesVersion = '0.1.4'
     rxScreenshotVersion = '1.2.0'
+    googleFirebaseVersion = '16.0.1'
 
     //Testing
     jUnitVersion = '4.12'
@@ -68,7 +69,8 @@ ext {
             rxAndroid           : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
             rxJava              : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
             securePreference    : [group: 'com.scottyab', name: 'secure-preferences-lib', version: securePreferencesVersion],
-            fastjson            : [group: 'com.alibaba', name: 'fastjson', version: fastjsonVersion]
+            fastjson            : [group: 'com.alibaba', name: 'fastjson', version: fastjsonVersion],
+            firebase            : [group: 'com.google.firebase', name: 'firebase-core', version: googleFirebaseVersion]
     ]
 
     def testLibs = [
@@ -91,9 +93,9 @@ ext {
             [configuration: "implementation", dependency: androidLibs.multidex],
             [configuration: "implementation", dependency: libs.rxAndroid],
             [configuration: "implementation", dependency: libs.rxJava],
+            [configuration: "implementation", dependency: libs.firebase],
             [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
             [configuration: "annotationProcessor", dependency: libs.butterknifeCompiler]
-
     ]
 
     domainDependencies = [

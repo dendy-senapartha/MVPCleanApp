@@ -17,7 +17,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-
+/**
+ * Note data repository. Used to passing request to retrieve or push data from specific usecase to data factory.
+ *
+ * **/
 @Singleton
 public class NoteDataRepository implements NoteRepository{
 

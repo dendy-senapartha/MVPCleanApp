@@ -18,7 +18,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
+/**
+ * Class used to save note preferences using SharedPreferences engine
+ * **/
 @Singleton
 public class NotePreferences {
 
