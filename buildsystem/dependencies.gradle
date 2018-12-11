@@ -70,7 +70,9 @@ ext {
             rxJava              : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
             securePreference    : [group: 'com.scottyab', name: 'secure-preferences-lib', version: securePreferencesVersion],
             fastjson            : [group: 'com.alibaba', name: 'fastjson', version: fastjsonVersion],
-            firebase            : [group: 'com.google.firebase', name: 'firebase-core', version: googleFirebaseVersion]
+            firebaseCore        : [group: 'com.google.firebase', name: 'firebase-core', version: googleFirebaseVersion],
+            firebaseAuth        : [group: 'com.google.firebase', name: 'firebase-auth', version: googleFirebaseVersion],
+            firebaseRealTimeDB  : [group: 'com.google.firebase', name: 'firebase-database', version: googleFirebaseVersion]
     ]
 
     def testLibs = [
@@ -93,7 +95,9 @@ ext {
             [configuration: "implementation", dependency: androidLibs.multidex],
             [configuration: "implementation", dependency: libs.rxAndroid],
             [configuration: "implementation", dependency: libs.rxJava],
-            [configuration: "implementation", dependency: libs.firebase],
+            [configuration: "implementation", dependency: libs.firebaseCore],
+            [configuration: "implementation", dependency: libs.firebaseAuth],
+            [configuration: "implementation", dependency: libs.firebaseRealTimeDB],
             [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
             [configuration: "annotationProcessor", dependency: libs.butterknifeCompiler]
     ]
@@ -113,13 +117,16 @@ ext {
     dataDependencies = [
             [configuration: "implementation", dependency: androidLibs.appCompat],
             [configuration: "implementation", dependency: libs.dagger],
-            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
             [configuration: "implementation", dependency: libs.rxAndroid],
             [configuration: "implementation", dependency: libs.rxJava],
-            [configuration: "testImplementation", dependency: testLibs.junit],
-            [configuration: "androidTestImplementation", dependency: testLibs.runner],
-            [configuration: "androidTestImplementation", dependency: testLibs.espressoCore],
             [configuration: "implementation", dependency: libs.securePreference],
             [configuration: "implementation", dependency: libs.fastjson],
+            [configuration: "implementation", dependency: libs.firebaseCore],
+            [configuration: "implementation", dependency: libs.firebaseAuth],
+            [configuration: "implementation", dependency: libs.firebaseRealTimeDB],
+            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testLibs.runner],
+            [configuration: "androidTestImplementation", dependency: testLibs.espressoCore]
     ]
 }

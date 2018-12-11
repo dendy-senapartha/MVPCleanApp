@@ -6,7 +6,6 @@ import com.example.data.Source;
 import com.example.data.note.mapper.NoteRespondMapper;
 import com.example.data.note.repository.source.NoteEntityData;
 import com.example.data.note.repository.source.NoteEntityDataFactory;
-import com.example.data.note.repository.source.preference.response.NoteResponse;
 import com.example.domain.note.NoteResult;
 import com.example.domain.note.repository.NoteRepository;
 

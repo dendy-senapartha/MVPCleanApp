@@ -10,14 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".mainactivity.MainActivity"
+        <activity
+            android:name=".mainactivity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar.ToolbarOverlay">
+        </activity>
+        <activity android:name=".addeditnotes.AddEditNoteActivity" />
+        <activity android:name=".signin.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addeditnotes.AddEditNoteActivity" />
     </application>
 
 </manifest>

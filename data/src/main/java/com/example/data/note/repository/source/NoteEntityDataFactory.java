@@ -1,6 +1,7 @@
 package com.example.data.note.repository.source;
 
 import com.example.data.AbstractEntityDataFactory;
+import com.example.data.note.repository.source.preference.NotePreferences;
 import com.example.data.note.repository.source.preference.PreferenceNoteEntityData;
 
 import javax.inject.Inject;

@@ -9,6 +9,7 @@ import com.example.dendy_s784.mvccleanapptemplate.base.BaseActivity;
 import com.example.domain.PostExecutionThread;
 import com.example.domain.ThreadExecutor;
 import com.example.domain.note.repository.NoteRepository;
+import com.example.domain.signin.repository.UserRepository;
 
 import javax.inject.Singleton;
 
@@ -26,4 +27,5 @@ public interface ApplicationComponent {
     ThreadExecutor threadExecutor();
     PostExecutionThread postExecutionThread();
     NoteRepository provideNoteRepository();
+    UserRepository provideUserRepository();
 }

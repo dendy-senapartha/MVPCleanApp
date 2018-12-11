@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.example.data.base.UnInitializedSecuredPreferencesException;
 import com.example.data.note.repository.source.NoteEntityData;
-import com.example.data.note.repository.source.NotePreferences;
 import com.example.data.note.repository.source.preference.response.NoteResponse;
 
 import java.util.ArrayList;
