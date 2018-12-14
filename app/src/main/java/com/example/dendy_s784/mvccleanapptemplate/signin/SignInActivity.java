@@ -74,9 +74,10 @@ public class SignInActivity extends BaseActivity implements SignInContract.View{
             }
         });
 
+        presenter.IsSignIn();
         // Check auth on Activity start
        // if (mAuth.getCurrentUser() != null) {
-        //    onAuthSuccess(mAuth.getCurrentUser());
+            //onAuthSuccess(mAuth.getCurrentUser());
        // }
     }
 
@@ -125,25 +126,7 @@ public class SignInActivity extends BaseActivity implements SignInContract.View{
         //showProgressDialog();
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
-
         presenter.SignIn(email, password);
-        /*
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signIn:onComplete:" + task.isSuccessful());
-                        //hideProgressDialog();
-
-                        if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser());
-                        } else {
-                            Toast.makeText(SignInActivity.this, "Sign In Failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                */
     }
 
     private void signUp() {
@@ -155,22 +138,7 @@ public class SignInActivity extends BaseActivity implements SignInContract.View{
         //showProgressDialog();
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
-        /*
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUser:onComplete:" + task.isSuccessful());
-                        //hideProgressDialog();
-
-                        if (task.isSuccessful()) {
-                            onAuthSuccess(task.getResult().getUser());
-                        } else {
-                            Toast.makeText(SignInActivity.this, "Sign Up Failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
+        presenter.SignUp(email, password);
     }
 
     private void onAuthSuccess(FirebaseUser user) {

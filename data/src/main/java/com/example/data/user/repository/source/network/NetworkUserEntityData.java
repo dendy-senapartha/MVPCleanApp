@@ -6,6 +6,7 @@ import com.example.data.base.UnInitializedSecuredPreferencesException;
 import com.example.data.user.repository.source.UserEntityData;
 import com.example.data.user.repository.source.network.request.UserRequest;
 import com.example.data.user.repository.source.network.response.SignInResponse;
+import com.example.data.user.repository.source.network.response.SignUpResponse;
 
 import java.util.concurrent.Callable;
 
@@ -50,6 +51,20 @@ public class NetworkUserEntityData implements UserEntityData {
     public Observable<SignInResponse> SignIn(UserRequest userRequest) {
         return initObservable(()->{
             return userNetwork.SignIn(userRequest);
+        });
+    }
+
+    @Override
+    public Observable<Boolean> CheckSignIn() {
+        return initObservable(()->{
+            return userNetwork.CheckSignIn();
+        });
+    }
+
+    @Override
+    public Observable<SignUpResponse> SignUp(UserRequest userRequest) {
+        return initObservable(()->{
+            return userNetwork.SignUp(userRequest);
         });
     }
 }

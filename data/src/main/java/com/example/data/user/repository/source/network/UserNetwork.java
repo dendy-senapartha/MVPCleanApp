@@ -10,6 +10,7 @@ import com.example.data.user.UserEntity;
 import com.example.data.user.repository.source.UserEntityData;
 import com.example.data.user.repository.source.network.request.UserRequest;
 import com.example.data.user.repository.source.network.response.SignInResponse;
+import com.example.data.user.repository.source.network.response.SignUpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -47,7 +48,6 @@ public class UserNetwork {
 
     public SignInResponse SignIn(UserRequest userRequest) throws NullPointerException
     {
-        final SignInResponse[] response = {null};
         SignInResponse res = null;
         Task<AuthResult> task = mAuth.signInWithEmailAndPassword(userRequest.email, userRequest.password);
         if (task.isSuccessful()) {
@@ -58,38 +58,7 @@ public class UserNetwork {
             res = new SignInResponse(user);
             mDatabase.child("users").child(firebaseUser.getUid()).setValue(user);
         }
-        else
-        {
-
-        }
-
-        /*
-        mAuth.signInWithEmailAndPassword(userRequest.email, userRequest.password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser firebaseUser = task.getResult().getUser();
-
-                            UserEntity user = new UserEntity(firebaseUser.getUid(),
-                                    usernameFromEmail(firebaseUser.getEmail()), firebaseUser.getEmail());
-                            response[0] = new SignInResponse(user);
-                            mDatabase.child("users").child(firebaseUser.getUid()).setValue(user);
-                        } else {
-
-                        }
-                    }
-                });
-                */
-        if(res != null)
-        {
-            return res;
-        }
-        else
-        {
-            return null;
-        }
-
+        return res;
     }
 
     private String usernameFromEmail(String email) {
@@ -98,5 +67,27 @@ public class UserNetwork {
         } else {
             return email;
         }
+    }
+
+    public boolean CheckSignIn() {
+        boolean isSignIn= false;
+        if (mAuth.getCurrentUser() != null) {
+            isSignIn = true;
+        }
+        return isSignIn;
+    }
+
+    public SignUpResponse SignUp(UserRequest userRequest) {
+        SignUpResponse res = null;
+        Task<AuthResult> task = mAuth.createUserWithEmailAndPassword(userRequest.email, userRequest.password);
+        if (task.isSuccessful()) {
+            FirebaseUser firebaseUser = task.getResult().getUser();
+
+            UserEntity user = new UserEntity(firebaseUser.getUid(),
+                    usernameFromEmail(firebaseUser.getEmail()), firebaseUser.getEmail());
+            res = new SignUpResponse(user);
+            mDatabase.child("users").child(firebaseUser.getUid()).setValue(user);
+        }
+        return res;
     }
 }

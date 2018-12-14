@@ -8,6 +8,8 @@ import com.example.data.user.repository.source.UserEntityDataFactory;
 import com.example.data.user.repository.source.network.request.UserRequest;
 import com.example.domain.signin.SignInRequest;
 import com.example.domain.signin.SignInResult;
+import com.example.domain.signin.SignUpRequest;
+import com.example.domain.signin.SignUpResult;
 import com.example.domain.signin.repository.UserRepository;
 
 import javax.inject.Inject;
@@ -48,5 +50,24 @@ public class UserDataRepository implements UserRepository{
                 .map(mapper::transform)
         );
 
+    }
+
+    @Override
+    public Observable<SignInResult> SignOut() {
+        return null;
+    }
+
+    @Override
+    public Observable<Boolean> CheckSignIn() {
+        return initializedRequest(createUserData().CheckSignIn()
+        );
+    }
+
+    @Override
+    public Observable<SignUpResult> SignUp(SignUpRequest signUpRequest) {
+        return initializedRequest(createUserData()
+                .SignUp(new UserRequest(signUpRequest.email, signUpRequest.password))
+                .map(mapper::transform)
+        );
     }
 }

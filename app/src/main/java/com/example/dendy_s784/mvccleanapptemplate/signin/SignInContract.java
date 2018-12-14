@@ -11,6 +11,8 @@ public interface SignInContract {
 
     interface Presenter extends AbstractContract.AbstractPresenter{
         void SignIn(String email, String password);
+        void SignUp(String email, String password);
         void SignOut();
+        void IsSignIn();
     }
 }
