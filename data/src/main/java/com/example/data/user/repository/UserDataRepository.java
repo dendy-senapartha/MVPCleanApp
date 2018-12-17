@@ -1,7 +1,6 @@
 package com.example.data.user.repository;
 
 import com.example.data.Source;
-import com.example.data.note.mapper.NoteRespondMapper;
 import com.example.data.user.repository.mapper.UserRespondMapper;
 import com.example.data.user.repository.source.UserEntityData;
 import com.example.data.user.repository.source.UserEntityDataFactory;
@@ -53,8 +52,8 @@ public class UserDataRepository implements UserRepository{
     }
 
     @Override
-    public Observable<SignInResult> SignOut() {
-        return null;
+    public Observable<Boolean> SignOut() {
+        return initializedRequest(createUserData().SignOut());
     }
 
     @Override

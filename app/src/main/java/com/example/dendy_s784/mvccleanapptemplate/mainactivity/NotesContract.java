@@ -16,17 +16,20 @@ public interface NotesContract {
         void showAddNote();
 
         void showNoteDetails(String taskId);
-        //void showAllFilterLabel();
+
         void setLoadingIndicator(boolean active);
-        void showLoadingNotesError();
+
         void showNoNotes();
 
-        void showMarkedNotesDelete();
         void onNoteDelete(ArrayList<String> mid);
+
+        void onSignOutSuccess();
     }
 
     interface Presenter extends AbstractContract.AbstractPresenter{
         void loadNotes();
         void deleteNote(ArrayList<Note> notes);
+
+        void signOut();
     }
 }

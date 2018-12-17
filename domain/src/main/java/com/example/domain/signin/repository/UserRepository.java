@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 public interface UserRepository {
     Observable<SignInResult> SignIn(SignInRequest signInRequest);
 
-    Observable<SignInResult> SignOut();
+    Observable<Boolean> SignOut();
     Observable<Boolean> CheckSignIn();
 
     Observable<SignUpResult> SignUp(SignUpRequest signUpRequest);

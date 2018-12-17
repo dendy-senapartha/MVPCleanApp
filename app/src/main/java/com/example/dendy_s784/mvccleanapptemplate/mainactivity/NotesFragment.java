@@ -31,6 +31,7 @@ import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.D
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.MainActivityComponent;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.modules.MainActivityModule;
 import com.example.dendy_s784.mvccleanapptemplate.model.Note;
+import com.example.dendy_s784.mvccleanapptemplate.signin.SignInActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -295,11 +296,6 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
     }
 
     @Override
-    public void showLoadingNotesError() {
-        showMessage(getString(R.string.loading_notes_error));
-    }
-
-    @Override
     public void showNoNotes() {
         showNoTasksViews(
                 getResources().getString(R.string.no_notes_all),
@@ -315,11 +311,6 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
         mNoNotesMainView.setText(mainText);
         mNoNotesIcon.setImageDrawable(getResources().getDrawable(iconRes));
         mNoNotesAddView.setVisibility(showAddView ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void showMarkedNotesDelete() {
-        showMessage(getString(R.string.marked_notes_delete));
     }
 
     @Override
@@ -344,6 +335,12 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
         if (noteList.size() == 0) {
             showNoNotes();
         }
+    }
+
+    @Override
+    public void onSignOutSuccess() {
+        startActivity(new Intent(getActivity(), SignInActivity.class));
+        getActivity().finish();
     }
 
     private void showMessage(String message) {
@@ -384,5 +381,9 @@ public class NotesFragment extends BaseFragment implements NotesContract.View, A
     @Override
     public void onNeutralClick(int from) {
 
+    }
+
+    public void signOut() {
+        presenter.signOut();
     }
 }

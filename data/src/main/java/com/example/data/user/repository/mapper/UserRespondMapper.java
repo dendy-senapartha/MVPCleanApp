@@ -20,7 +20,17 @@ public class UserRespondMapper {
         SignInResult result = null;
         if(response !=null)
         {
-            result = new SignInResult(response.userEntity.uid, response.userEntity.name, response.userEntity.email);
+            //TODO : need to rework on error handling
+            if(response.userEntity.uid !=null)
+            {
+                result = new SignInResult(response.userEntity.uid, response.userEntity.name, response.userEntity.email);
+                result.exception = "";
+            }
+            else
+            {
+                result =new SignInResult();
+                result.exception = response.exception;
+            }
         }
         return result;
     }
@@ -29,7 +39,17 @@ public class UserRespondMapper {
         SignUpResult result = null;
         if(response !=null)
         {
-            result = new SignUpResult(response.userEntity.uid, response.userEntity.name, response.userEntity.email);
+            //TODO : need to rework on error handling
+            if(response.userEntity.uid !=null)
+            {
+                result = new SignUpResult(response.userEntity.uid, response.userEntity.name, response.userEntity.email);
+                result.exception = "";
+            }
+            else
+            {
+                result =new SignUpResult();
+                result.exception = response.exception;
+            }
         }
         return result;
     }

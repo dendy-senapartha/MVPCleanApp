@@ -40,25 +40,36 @@ public class UserNetwork {
         this.serializer = serializer;
     }
 
-    public void init()
-    {
+    public void init() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public SignInResponse SignIn(UserRequest userRequest) throws NullPointerException
-    {
-        SignInResponse res = null;
-        Task<AuthResult> task = mAuth.signInWithEmailAndPassword(userRequest.email, userRequest.password);
-        if (task.isSuccessful()) {
-            FirebaseUser firebaseUser = task.getResult().getUser();
+    public SignInResponse SignIn(UserRequest userRequest) throws NullPointerException {
+        final SignInResponse[] res = {null};
+        mAuth.signInWithEmailAndPassword(userRequest.email, userRequest.password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = task.getResult().getUser();
 
-            UserEntity user = new UserEntity(firebaseUser.getUid(),
-                    usernameFromEmail(firebaseUser.getEmail()), firebaseUser.getEmail());
-            res = new SignInResponse(user);
-            mDatabase.child("users").child(firebaseUser.getUid()).setValue(user);
+                            UserEntity user = new UserEntity(firebaseUser.getUid(),
+                                    usernameFromEmail(firebaseUser.getEmail()), firebaseUser.getEmail());
+                            res[0] = new SignInResponse(user);
+                            mDatabase.child("users").child(firebaseUser.getUid()).setValue(user);
+                        } else {
+                            res[0] = new SignInResponse();
+                            res[0].exception = task.getException().toString();
+                        }
+                    }
+                });
+        while (res[0] == null) {
+            //TODO : fin other way to syncronyze result callback from firebase
+            Log.d("SignIn", "login in wait");
         }
-        return res;
+
+        return res[0];
     }
 
     private String usernameFromEmail(String email) {
@@ -70,7 +81,7 @@ public class UserNetwork {
     }
 
     public boolean CheckSignIn() {
-        boolean isSignIn= false;
+        boolean isSignIn = false;
         if (mAuth.getCurrentUser() != null) {
             isSignIn = true;
         }
@@ -78,16 +89,39 @@ public class UserNetwork {
     }
 
     public SignUpResponse SignUp(UserRequest userRequest) {
-        SignUpResponse res = null;
-        Task<AuthResult> task = mAuth.createUserWithEmailAndPassword(userRequest.email, userRequest.password);
-        if (task.isSuccessful()) {
-            FirebaseUser firebaseUser = task.getResult().getUser();
 
-            UserEntity user = new UserEntity(firebaseUser.getUid(),
-                    usernameFromEmail(firebaseUser.getEmail()), firebaseUser.getEmail());
-            res = new SignUpResponse(user);
-            mDatabase.child("users").child(firebaseUser.getUid()).setValue(user);
+        final SignUpResponse[] res = {null};
+        mAuth.createUserWithEmailAndPassword(userRequest.email, userRequest.password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = task.getResult().getUser();
+
+                            UserEntity user = new UserEntity(firebaseUser.getUid(),
+                                    usernameFromEmail(firebaseUser.getEmail()), firebaseUser.getEmail());
+                            res[0] = new SignUpResponse(user);
+                            mDatabase.child("users").child(firebaseUser.getUid()).setValue(user);
+                        } else {
+                            res[0] = new SignUpResponse();
+                            res[0].exception = task.getException().toString();
+                        }
+                    }
+                });
+        while (res[0] == null) {
+            //TODO : fin other way to syncronyze result callback from firebase
+            Log.d("SignUp","SignUp in wait");
         }
-        return res;
+
+        return res[0];
+    }
+
+    public boolean SignOut() {
+        boolean isSignOut = false;
+        mAuth.signOut();
+        if (mAuth.getCurrentUser() == null) {
+            isSignOut = true;
+        }
+        return isSignOut;
     }
 }

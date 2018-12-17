@@ -77,8 +77,9 @@ public class MainActivity extends BaseActivity {
                             case R.id.list_item:
                                 //TODO :define the action for list_item
                                 break;
-                            case R.id.list_item2:
+                            case R.id.logout:
                                 //TODO :define the action
+                                notesFragment.signOut();
                                 break;
                             default:
                                 break;

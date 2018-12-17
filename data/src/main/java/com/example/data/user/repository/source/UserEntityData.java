@@ -12,4 +12,6 @@ public interface UserEntityData {
     Observable<SignInResponse> SignIn(UserRequest userRequest);
     Observable<SignUpResponse> SignUp(UserRequest userRequest);
     Observable<Boolean> CheckSignIn();
+
+    Observable<Boolean> SignOut();
 }

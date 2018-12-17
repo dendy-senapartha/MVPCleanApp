@@ -4,6 +4,7 @@ import com.example.data.user.UserEntity;
 
 public class SignUpResponse {
     public UserEntity userEntity;
+    public String exception;
 
     public SignUpResponse() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

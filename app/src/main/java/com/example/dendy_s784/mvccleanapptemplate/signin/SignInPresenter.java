@@ -1,6 +1,7 @@
 package com.example.dendy_s784.mvccleanapptemplate.signin;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.domain.DefaultObserver;
 import com.example.domain.signin.SignInRequest;
@@ -40,12 +41,13 @@ public class SignInPresenter implements SignInContract.Presenter {
             @Override
             public void onNext(SignInResult signInResult  ) {
                 //System.out.printf("noteResult " + noteResult);
+                Log.d("SignIn","onNext : "+signInResult.exception);
                 view.OnSignInSuccess();
             }
 
             @Override
             public void onError(Throwable e) {
-
+                Log.d("SignIn","onError: "+e.toString());
             }
         }, new SignInRequest(email, password));
     }
@@ -56,6 +58,7 @@ public class SignInPresenter implements SignInContract.Presenter {
             @Override
             public void onNext(SignUpResult signUpResult  ) {
                 //TODO: if user are new, it should redirect user to confirm email page
+                Log.d("SignUp","onNext : "+signUpResult.exception);
                 view.OnSignInSuccess();
             }
 

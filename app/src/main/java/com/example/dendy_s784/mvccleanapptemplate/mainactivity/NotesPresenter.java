@@ -8,6 +8,7 @@ import com.example.domain.DefaultObserver;
 import com.example.domain.note.NoteResult;
 import com.example.domain.note.interactor.DeleteNote;
 import com.example.domain.note.interactor.GetNotes;
+import com.example.domain.signin.interactor.SignOut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,18 @@ public class NotesPresenter implements NotesContract.Presenter {
 
     private final NotesResultMapper notesResultMapper;
 
+    private final SignOut signOut;
+
     @Inject
     public NotesPresenter(Context context, NotesContract.View view,
-                          GetNotes getNotes, DeleteNote deleteNote, NotesResultMapper notesResultMapper) {
+                          GetNotes getNotes, DeleteNote deleteNote, NotesResultMapper notesResultMapper,
+                          SignOut signOut) {
         this.context = context;
         this.view = view;
         this.getNotes = getNotes;
         this.deleteNote = deleteNote;
         this.notesResultMapper = notesResultMapper;
+        this.signOut = signOut;
     }
 
     @Override
@@ -67,6 +72,25 @@ public class NotesPresenter implements NotesContract.Presenter {
 
             }
         }, DeleteNote.Params.forDeleteNote(midNotes));
+    }
+
+    @Override
+    public void signOut() {
+        signOut.execute(new DefaultObserver<Boolean>(){
+            @Override
+            public void onNext(Boolean result) {
+                if(result)
+                {
+                    view.onSignOutSuccess();
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 
     /**

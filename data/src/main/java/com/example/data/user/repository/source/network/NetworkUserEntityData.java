@@ -62,6 +62,13 @@ public class NetworkUserEntityData implements UserEntityData {
     }
 
     @Override
+    public Observable<Boolean> SignOut() {
+        return initObservable(()->{
+            return userNetwork.SignOut();
+        });
+    }
+
+    @Override
     public Observable<SignUpResponse> SignUp(UserRequest userRequest) {
         return initObservable(()->{
             return userNetwork.SignUp(userRequest);
