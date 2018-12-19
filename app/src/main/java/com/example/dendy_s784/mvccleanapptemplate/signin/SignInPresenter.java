@@ -3,6 +3,8 @@ package com.example.dendy_s784.mvccleanapptemplate.signin;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.dendy_s784.mvccleanapptemplate.aplication.MVPCleanAppTemplate;
+import com.example.dendy_s784.mvccleanapptemplate.base.Events;
 import com.example.domain.DefaultObserver;
 import com.example.domain.signin.SignInRequest;
 import com.example.domain.signin.SignInResult;
@@ -12,7 +14,10 @@ import com.example.domain.signin.interactor.CheckSignIn;
 import com.example.domain.signin.interactor.SignIn;
 import com.example.domain.signin.interactor.SignUp;
 
+
 import javax.inject.Inject;
+
+import io.reactivex.functions.Consumer;
 
 public class SignInPresenter implements SignInContract.Presenter {
 
@@ -33,6 +38,8 @@ public class SignInPresenter implements SignInContract.Presenter {
         this.signIn = signIn;
         this.checkSignIn = checkSignIn;
         this.signUp = signUp;
+
+
     }
 
     @Override
@@ -42,6 +49,8 @@ public class SignInPresenter implements SignInContract.Presenter {
             public void onNext(SignInResult signInResult  ) {
                 //System.out.printf("noteResult " + noteResult);
                 Log.d("SignIn","onNext : "+signInResult.exception);
+                //eventbus using RXJava example
+                ((MVPCleanAppTemplate)context).getBus().send(new Events.AutoEvent());
                 view.OnSignInSuccess();
             }
 
@@ -76,6 +85,8 @@ public class SignInPresenter implements SignInContract.Presenter {
 
     @Override
     public void IsSignIn() {
+        Log.i("context.getClass() : ",""+context.getClass());
+        context.getApplicationContext();
         checkSignIn.execute(new DefaultObserver<Boolean>(){
             @Override
             public void onNext(Boolean result) {

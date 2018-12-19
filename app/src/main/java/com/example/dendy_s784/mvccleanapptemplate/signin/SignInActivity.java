@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dendy_s784.mvccleanapptemplate.R;
+import com.example.dendy_s784.mvccleanapptemplate.aplication.MVPCleanAppTemplate;
 import com.example.dendy_s784.mvccleanapptemplate.base.BaseActivity;
+import com.example.dendy_s784.mvccleanapptemplate.base.Events;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.DaggerSignInActivityComponent;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.SignInActivityComponent;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.modules.SignInActivityModule;
@@ -75,10 +77,22 @@ public class SignInActivity extends BaseActivity implements SignInContract.View{
         });
 
         presenter.IsSignIn();
-        // Check auth on Activity start
-       // if (mAuth.getCurrentUser() != null) {
-            //onAuthSuccess(mAuth.getCurrentUser());
-       // }
+
+        //register eventbus using RXJava example
+        ((MVPCleanAppTemplate)getApplication()).getBus()
+                .toObservable()
+                .subscribe(object ->{
+                    if(object instanceof Events.AutoEvent)
+                    {
+                        Log.i("EVENT BUS", "AutoEvent ");
+                    }
+                    if(object instanceof Events.TapEvent)
+                    {
+                        Log.i("EVENT BUS", "TapEvent ");
+                    }
+
+                });
+
     }
 
     private void initComponent() {
@@ -140,33 +154,6 @@ public class SignInActivity extends BaseActivity implements SignInContract.View{
         String password = mPasswordField.getText().toString();
         presenter.SignUp(email, password);
     }
-
-    private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
-
-        // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
-
-        // Go to MainActivity
-        startActivity(new Intent(SignInActivity.this, MainActivity.class));
-        finish();
-    }
-
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
-
-    // [START basic_write]
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
-
-        //mDatabase.child("users").child(userId).setValue(user);
-    }
-    // [END basic_write]
 
     @Override
     public void OnSignInSuccess() {
