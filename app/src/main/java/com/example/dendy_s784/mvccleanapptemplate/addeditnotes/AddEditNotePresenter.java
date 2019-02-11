@@ -35,7 +35,7 @@ public class AddEditNotePresenter implements AddEditNoteContract.Presenter
 
     @Override
     public void saveNote(Note note) {
-        if (note.getmTitle().isEmpty() || note.getmDescription().isEmpty()) {
+        if (note.getmTitle().isEmpty()) {
             mAddNoteView.onNoteSaveFailed(context.getResources().getString(R.string.nothing_to_save));
         } else {
             saveNote.execute(new DefaultObserver<NoteResult>(){

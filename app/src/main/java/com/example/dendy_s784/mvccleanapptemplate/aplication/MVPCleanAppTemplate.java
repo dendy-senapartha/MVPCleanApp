@@ -7,6 +7,7 @@ import com.example.dendy_s784.mvccleanapptemplate.base.RxBus;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.ApplicationComponent;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.DaggerApplicationComponent;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.modules.ApplicationModule;
+import com.google.firebase.database.FirebaseDatabase;
 
 import timber.log.Timber;
 
@@ -19,6 +20,8 @@ public class MVPCleanAppTemplate extends MultiDexApplication{
     public void onCreate()
     {
         super.onCreate();
+        //Enabling Offline Capabilities
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         //eventbus using RX java init
         bus = new RxBus();
         if (BuildConfig.DEBUG) {

@@ -91,7 +91,11 @@ android {
             variant.resValue("string", "app_name", "MVC-CLEAN-APP-TEMPLATE-PROD")
         }
     }
-    buildToolsVersion '28.0.2'
+    /*
+    WARNING: The specified Android SDK Build Tools version (28.0.2) is ignored, as it is below the minimum supported version (28.0.3) for Android Gradle Plugin 3.3.0.
+            Android SDK Build Tools 28.0.3 will be used.
+            To suppress this warning, remove "buildToolsVersion '28.0.2'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.*/
+    //buildToolsVersion '28.0.2'
 }
 
 dependencies {

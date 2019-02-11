@@ -58,7 +58,6 @@ public class ApplicationModule {
         return noteDataRepository;
     }
 
-
     @Provides
     @Singleton
     UserRepository provideUserRepository(UserDataRepository userDataRepository) {

@@ -9,7 +9,7 @@
     <string name="marked_notes_delete">Marked notes deleted</string>
     <string name="menu_back">Back</string>
     <string name="menu_next">Next</string>
-    <string name="nothing_to_save">Nothing to save.</string>
+    <string name="nothing_to_save">Nothing to save. Note Title cant be empty</string>
     <string name="menu_item_delete">Delete</string>
     <string name="menu_login">Log in</string>
     <string name="menu_logout">Log out</string>

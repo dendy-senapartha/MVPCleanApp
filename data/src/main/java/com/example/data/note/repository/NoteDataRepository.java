@@ -14,7 +14,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import io.reactivex.Observable;
 /**
  * Note data repository. Used to passing request to retrieve or push data from specific usecase to data factory.
@@ -41,24 +40,32 @@ public class NoteDataRepository implements NoteRepository{
         return observable.onErrorResumeNext(observable);
     }
 
-    private NoteEntityData createNoteData() {
+    private NoteEntityData createNoteDataOffline() {
         return noteEntityDataFactory.createData(Source.LOCAL);
+    }
+
+    private NoteEntityData createNoteDataNetwork() {
+        return noteEntityDataFactory.createData(Source.NETWORK);
+    }
+
+    private NoteEntityData createNoteDataMock() {
+        return noteEntityDataFactory.createData(Source.MOCK);
     }
 
     @Override
     public Observable<List<NoteResult>> getNotes() {
-        return initializedRequest(createNoteData().getNotes().map(mapper::transformFromList));
+        return initializedRequest(createNoteDataNetwork().getNotes().map(mapper::transformFromList));
     }
 
     @Override
     public Observable<NoteResult> getNote(@NonNull String taskId) {
-        return initializedRequest(createNoteData().getNote(taskId).map(mapper::transform));
+        return initializedRequest(createNoteDataNetwork().getNote(taskId).map(mapper::transform));
     }
 
     @Override
     public Observable<NoteResult> saveNote(@NonNull String mid, @NonNull String mTitle,
                                              @NonNull String mDescription) {
-        return initializedRequest(createNoteData().saveNote(mid, mTitle, mDescription).map(mapper::transform));
+        return initializedRequest(createNoteDataNetwork().saveNote(mid, mTitle, mDescription).map(mapper::transform));
     }
 
     @Override
@@ -73,7 +80,7 @@ public class NoteDataRepository implements NoteRepository{
 
     @Override
     public Observable<ArrayList<String>> deleteNotes(@NonNull ArrayList<String>  mid) {
-        return initializedRequest(createNoteData().deleteNote(mid));
+        return initializedRequest(createNoteDataNetwork().deleteNote(mid));
 
     }
 }
