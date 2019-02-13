@@ -58,8 +58,6 @@ public class SignInActivity extends BaseActivity implements SignInContract.View{
 
     @Override
     public void init() {
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
-       // mAuth = FirebaseAuth.getInstance();
         initComponent();
 
         mSignInButton.setOnClickListener(new View.OnClickListener() {
