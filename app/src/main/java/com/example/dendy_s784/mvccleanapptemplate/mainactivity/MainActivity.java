@@ -1,13 +1,11 @@
 package com.example.dendy_s784.mvccleanapptemplate.mainactivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -15,6 +13,7 @@ import android.widget.PopupMenu;
 import com.example.dendy_s784.mvccleanapptemplate.R;
 import com.example.dendy_s784.mvccleanapptemplate.base.BaseActivity;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.MainActivityComponent;
+import com.example.dendy_s784.mvccleanapptemplate.draganddrop.DragActivity;
 
 import butterknife.BindView;
 
@@ -74,8 +73,9 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.list_item:
+                            case R.id.drag_and_drop_example:
                                 //TODO :define the action for list_item
+                                startActivity(new Intent(MainActivity.this, DragActivity.class));
                                 break;
                             case R.id.logout:
                                 //TODO :define the action

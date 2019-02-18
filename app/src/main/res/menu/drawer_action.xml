@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/list_item"
-        android:title="List"
+        android:id="@+id/drag_and_drop_example"
+        android:title="Drag and Drop Example"
         />
     <item
         android:id="@+id/logout"

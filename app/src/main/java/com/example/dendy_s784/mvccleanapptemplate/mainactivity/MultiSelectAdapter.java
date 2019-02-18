@@ -25,12 +25,12 @@ public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.
     Context mContext;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
-        public LinearLayout listNOte;
+        public LinearLayout noteContainer;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.note_title);
-            listNOte =(LinearLayout)view.findViewById(R.id.listnote);
+            noteContainer =(LinearLayout)view.findViewById(R.id.noteItemLayout);
 
         }
     }
@@ -56,9 +56,9 @@ public class MultiSelectAdapter extends RecyclerView.Adapter<MultiSelectAdapter.
         holder.title.setText(note.getmTitle());
 
         if(selected_usersList.contains(usersList.get(position)))
-            holder.listNOte.setBackgroundColor(ContextCompat.getColor(mContext, R.color.list_item_selected_state));
+            holder.noteContainer.setBackgroundColor(ContextCompat.getColor(mContext, R.color.list_item_selected_state));
         else
-            holder.listNOte.setBackgroundColor(ContextCompat.getColor(mContext, R.color.list_item_normal_state));
+            holder.noteContainer.setBackgroundColor(ContextCompat.getColor(mContext, R.color.list_item_normal_state));
 
     }
 
