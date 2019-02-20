@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.PopupMenu;
 
 import com.example.dendy_s784.mvccleanapptemplate.R;
+import com.example.dendy_s784.mvccleanapptemplate.aboutactivity.AboutActivity;
 import com.example.dendy_s784.mvccleanapptemplate.base.BaseActivity;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.MainActivityComponent;
 import com.example.dendy_s784.mvccleanapptemplate.draganddrop.DragActivity;
@@ -120,11 +121,9 @@ public class MainActivity extends BaseActivity {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.menu_delete_marked:
+                    case R.id.menu_about:
+                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
                         //mPresenter.DeleteMarkedNotes(mMarkedNotes);
-                        break;
-                    case R.id.menu_refresh:
-                        //mPresenter.loadNotes(true);
                         break;
                 }
                 return true;

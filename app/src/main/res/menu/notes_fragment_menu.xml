@@ -2,11 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_delete_marked"
-        android:title="Delete Marked Notes"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_refresh"
-        android:title="Refresh"
+        android:id="@+id/menu_about"
+        android:title="About"
         app:showAsAction="never" />
 </menu>

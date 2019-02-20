@@ -18,7 +18,10 @@ ext {
     rxJavaVersion = '2.x.x'
     cardviewVersion = '27.1.1'
     securePreferencesVersion = '0.1.4'
-    googleFirebaseVersion = '16.0.1'
+    googleFirebaseAuthVersion = '16.1.0'
+    googleFirebaseRTDBVersion = '16.0.6'
+    googleFCMVersion = '17.3.4'
+    googleFirebaseIID = '17.0.4'
 
     //Testing
     jUnitVersion = '4.12'
@@ -49,9 +52,10 @@ ext {
             rxJava              : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxJavaVersion],
             securePreference    : [group: 'com.scottyab', name: 'secure-preferences-lib', version: securePreferencesVersion],
             fastjson            : [group: 'com.alibaba', name: 'fastjson', version: fastjsonVersion],
-            firebaseCore        : [group: 'com.google.firebase', name: 'firebase-core', version: googleFirebaseVersion],
-            firebaseAuth        : [group: 'com.google.firebase', name: 'firebase-auth', version: googleFirebaseVersion],
-            firebaseRealTimeDB  : [group: 'com.google.firebase', name: 'firebase-database', version: googleFirebaseVersion]
+            firebaseAuth        : [group: 'com.google.firebase', name: 'firebase-auth', version: googleFirebaseAuthVersion],
+            firebaseRealTimeDB  : [group: 'com.google.firebase', name: 'firebase-database', version: googleFirebaseRTDBVersion],
+            firebaseCloudMessaging : [group: 'com.google.firebase', name: 'firebase-messaging', version: googleFCMVersion],
+            firebaseIID         : [group: 'com.google.firebase', name: 'firebase-iid', version: googleFirebaseIID]
     ]
 
     def testLibs = [
@@ -74,9 +78,9 @@ ext {
             [configuration: "implementation", dependency: androidLibs.multidex],
             [configuration: "implementation", dependency: libs.rxAndroid],
             [configuration: "implementation", dependency: libs.rxJava],
-            [configuration: "implementation", dependency: libs.firebaseCore],
             [configuration: "implementation", dependency: libs.firebaseAuth],
             [configuration: "implementation", dependency: libs.firebaseRealTimeDB],
+            [configuration: "implementation", dependency: libs.firebaseCloudMessaging],
             [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
             [configuration: "annotationProcessor", dependency: libs.butterknifeCompiler]
     ]
@@ -100,7 +104,6 @@ ext {
             [configuration: "implementation", dependency: libs.rxJava],
             [configuration: "implementation", dependency: libs.securePreference],
             [configuration: "implementation", dependency: libs.fastjson],
-            [configuration: "implementation", dependency: libs.firebaseCore],
             [configuration: "implementation", dependency: libs.firebaseAuth],
             [configuration: "implementation", dependency: libs.firebaseRealTimeDB],
             [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
