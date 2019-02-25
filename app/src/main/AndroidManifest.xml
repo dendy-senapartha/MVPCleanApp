@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dendy_s784.mvccleanapptemplate">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+
     <application
         android:name=".aplication.MVPCleanAppTemplate"
         android:allowBackup="true"
@@ -21,11 +24,18 @@
         </activity>
         <activity android:name=".draganddrop.DragActivity" />
         <activity android:name=".aboutactivity.AboutActivity"/>
+        <activity android:name=".locationservice.LocationActivity"/>
         <service android:name=".fcmservice.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <!-- Service that provides activity recognition data. Setting the android:exported attribute
+        to "false" stops other apps from starting this service, even when using an explicit
+        intent. -->
+        <service
+            android:name=".locationservice.ActivityRecognitionIntentService"
+            android:exported="false" />
     </application>
 
 </manifest>

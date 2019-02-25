@@ -1,11 +1,8 @@
 package com.example.dendy_s784.mvccleanapptemplate.aplication;
 
 import android.content.Context;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.support.multidex.MultiDexApplication;
 import com.example.dendy_s784.mvccleanapptemplate.BuildConfig;
-import com.example.dendy_s784.mvccleanapptemplate.base.BaseBroadcastReceiver;
 import com.example.dendy_s784.mvccleanapptemplate.base.RxBus;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.ApplicationComponent;
 import com.example.dendy_s784.mvccleanapptemplate.dependecyinjection.component.DaggerApplicationComponent;
@@ -37,12 +34,6 @@ public class MVPCleanAppTemplate extends MultiDexApplication{
         registerActivityLifecycleCallbacks(new ApplicationOrientationCallback());
         initializeContext();
         initInjector();
-
-        IntentFilter intentFilter = new IntentFilter();
-        //register broadcast receiver
-        //https://stackoverflow.com/questions/36421930/connectivitymanager-connectivity-action-deprecated
-        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(new BaseBroadcastReceiver(), intentFilter);
     }
 
     private void initializeContext() {

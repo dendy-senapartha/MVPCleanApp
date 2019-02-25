@@ -22,6 +22,7 @@ ext {
     googleFirebaseRTDBVersion = '16.0.6'
     googleFCMVersion = '17.3.4'
     googleFirebaseIID = '17.0.4'
+    googleLocation = '16.0.0'
 
     //Testing
     jUnitVersion = '4.12'
@@ -55,7 +56,8 @@ ext {
             firebaseAuth        : [group: 'com.google.firebase', name: 'firebase-auth', version: googleFirebaseAuthVersion],
             firebaseRealTimeDB  : [group: 'com.google.firebase', name: 'firebase-database', version: googleFirebaseRTDBVersion],
             firebaseCloudMessaging : [group: 'com.google.firebase', name: 'firebase-messaging', version: googleFCMVersion],
-            firebaseIID         : [group: 'com.google.firebase', name: 'firebase-iid', version: googleFirebaseIID]
+            firebaseIID         : [group: 'com.google.firebase', name: 'firebase-iid', version: googleFirebaseIID],
+            googleLocation      : [group: 'com.google.android.gms', name: 'play-services-location', version: googleLocation]
     ]
 
     def testLibs = [
@@ -81,6 +83,7 @@ ext {
             [configuration: "implementation", dependency: libs.firebaseAuth],
             [configuration: "implementation", dependency: libs.firebaseRealTimeDB],
             [configuration: "implementation", dependency: libs.firebaseCloudMessaging],
+            [configuration: "implementation", dependency: libs.googleLocation],
             [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
             [configuration: "annotationProcessor", dependency: libs.butterknifeCompiler]
     ]
