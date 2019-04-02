@@ -79,8 +79,7 @@
 -keepclassmembers class com.appsflyer.**{*;}
 
 #---------------------------------LOCAL KIT-----------------------------------
--keepclassmembers public class id.dana.domain.**{*;}
--keepclassmembers public class id.dana.data.**{*;}
+
 
 #---------------------------------third party ----------------------------------
 -keep class com.taobao.dp.**{*;}

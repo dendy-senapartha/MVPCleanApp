@@ -1,16 +1,11 @@
-/**
- * DANA.id
- * PT. Espay Debit Indonesia Koe.
- * Copyright (c) 2017-2018 All Rights Reserved.
- */
+
 package com.example.data;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * @author Randi Waranugraha (randi.waranugraha@dana.id)
- * @version $Id: SerializerFacade.java, v 0.1 2018‐07‐20 15.11 randi.waranugraha Exp $$
+ *
  */
 public interface SerializerFacade {
 
